@@ -78,7 +78,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.cursor--
 			}
 
-		case "enter", "1":
+		case "enter", "1", "right":
 			if len(m.entries) == 0 {
 				break
 			}
@@ -90,7 +90,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.cursor = 0
 			}
 
-		case "h", "backspace":
+		case "h", "backspace", "left":
 			parent := filepath.Dir(m.cwd)
 			m.cwd = parent
 			m.entries = loadDir(parent)
@@ -103,7 +103,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func main() {
-	p := tea.NewProgram(initialModel())
+	p := tea.NewProgram(initialModel(), tea.WithAltScreen())
 	if err := p.Start(); err != nil {
 		os.Exit(1)
 	}
