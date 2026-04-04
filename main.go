@@ -68,17 +68,17 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "q", "ctrl+c":
 			return m, tea.Quit
 		
-		case "j", "down":
+		case "s", "down":
 			if m.cursor < len(m.entries)-1 {
 				m.cursor++
 			}
 
-		case "k", "up":
+		case "w", "up":
 			if m.cursor > 0 {
 				m.cursor--
 			}
 
-		case "enter", "1", "right":
+		case "d", "right":
 			if len(m.entries) == 0 {
 				break
 			}
@@ -90,7 +90,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.cursor = 0
 			}
 
-		case "h", "backspace", "left":
+		case "a", "left":
 			parent := filepath.Dir(m.cwd)
 			m.cwd = parent
 			m.entries = loadDir(parent)
